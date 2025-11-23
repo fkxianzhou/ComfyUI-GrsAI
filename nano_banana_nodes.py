@@ -71,8 +71,12 @@ class GrsaiNanoBanana_Node:
                     },
                 ),
                 "model": (
-                    ["nano-banana", "nano-banana-fast"],
+                    ["nano-banana", "nano-banana-fast", "nano-banana-pro"],
                     {"default": "nano-banana-fast"},
+                ),
+                "imageSize": (
+                    default_config.SUPPORTED_NANO_BANANA_SIZES,
+                    {"default": "1K"},
                 ),
             },
             "optional": {
@@ -118,6 +122,10 @@ class GrsaiNanoBanana_Node:
 
         prompt = kwargs.pop("prompt")
         model = kwargs.pop("model")
+        
+        # [修改] 获取 imageSize
+        imageSize = kwargs.pop("imageSize", "1K")
+
         use_aspect_ratio = kwargs.pop("use_aspect_ratio", False)
         aspect_ratio = kwargs.pop("aspect_ratio", None)
         if not use_aspect_ratio:
@@ -180,6 +188,7 @@ class GrsaiNanoBanana_Node:
                     model=model,
                     urls=uploaded_urls,
                     aspect_ratio=aspect_ratio,
+                    imageSize=imageSize, # 传递新增参数
                 )
         except Exception as e:
             return self._create_error_result(

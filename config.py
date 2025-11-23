@@ -57,6 +57,13 @@ class GrsaiConfig:
         "21:9",
     ]
 
+    # Nano Banana Pro 支持的分辨率选项
+    SUPPORTED_NANO_BANANA_SIZES = [
+        "1K",
+        "2K",
+        "4K",
+    ]
+    
     # 支持的输出格式
     SUPPORTED_OUTPUT_FORMATS = ["jpeg", "png"]
 

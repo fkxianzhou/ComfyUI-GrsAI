@@ -238,6 +238,7 @@ class GrsaiAPI:
         model: str = "nano-banana",
         urls: List[str] = [],
         aspect_ratio: Optional[str] = None,
+        imageSize: Optional[str] = None,
     ) -> Tuple[List["Image.Image"], List[str], List[str]]:
         """
         Nano Banana API 调用
@@ -247,6 +248,7 @@ class GrsaiAPI:
             model: 使用的模型，默认 "nano-banana"。
                    可选值："nano-banana"、"nano-banana-fast"。
             urls: 可选的参考/输入图片 URL 列表（用于编辑场景）。
+            imageSize: 图片分辨率 (1K/2K/4K)，主要用于 nano-banana-pro。
 
         Returns:
             (pil_images, image_urls, errors)
@@ -265,6 +267,9 @@ class GrsaiAPI:
                     f"不支持的宽高比: {aspect_ratio}. 支持的选项: {', '.join(default_config.SUPPORTED_NANO_BANANA_AR)}"
                 )
             payload["aspectRatio"] = aspect_ratio
+
+        if imageSize:
+            payload["imageSize"] = imageSize
 
         print(json.dumps(payload, indent=4, ensure_ascii=False))
         print("🍌 开始调用 Nano Banana 接口...")
